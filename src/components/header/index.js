@@ -4,7 +4,7 @@ import logo from "../../assets/image/logo.png";
 
 const Header = () => {
   return (
-    <div className="primary header py-2">
+    <div className="bg-black header py-2 sticky">
       <div className="container">
         <div className="flex justify-between items-center">
           <Link to="/">
