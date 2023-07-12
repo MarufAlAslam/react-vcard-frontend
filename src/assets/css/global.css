@@ -1,0 +1,14 @@
+:root{
+    --primary-color: #5F36E0;
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.primary{
+    background-color: var(--primary-color);
+}
+.text-primary{
+    color: var(--primary-color);
+}
