@@ -3,6 +3,7 @@ import Hero from "../../components/homepage-components/hero";
 import Freedom from "../../components/homepage-components/freedom";
 import Featured from "../../components/homepage-components/featured";
 import HowItWorks from "../../components/homepage-components/how-it-works";
+import Features from "../../components/homepage-components/features";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Freedom />
       <Featured />
       <HowItWorks />
+      <Features/>
     </div>
   );
 };
