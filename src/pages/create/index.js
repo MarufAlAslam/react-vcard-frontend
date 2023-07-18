@@ -19,7 +19,7 @@ const Create = () => {
           <h2 className="text-3xl font-bold mb-4">Create Your Own Card</h2>
         </div>
 
-        <form action="" className="w-8/12 mx-auto">
+        <form action="/create/step1" className="md:w-8/12 w-full mx-auto">
           <div className="form-item mb-3">
             <label htmlFor="">Country</label>
             <input
