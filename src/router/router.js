@@ -6,6 +6,7 @@ import Step1 from "../pages/steps/step1";
 import Step2 from "../pages/steps/step2";
 import Step3 from "../pages/steps/step3";
 import Step4 from "../pages/steps/step4";
+import CardSample from "../pages/sample";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
         path: "/create/step4",
         element: <Step4 />,
       },
+      {
+        path: "/sample",
+        element: <CardSample/>
+      }
     ],
   },
 ]);

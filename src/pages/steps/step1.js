@@ -1,6 +1,58 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Step1 = () => {
+  const location = useLocation();
+  const state = location.state;
+  const insertedId = state.insertedId;
+
+  const navigator = useNavigate();
+
+  const updateCard = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const companyName = form.companyName.value;
+    const logo = "";
+    const prefix = form.prefix.value;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const designation = form.designation.value;
+    const bio = form.bio.value;
+    const phone = form.phone.value;
+    const altPhone = form.altPhone.value;
+    const whatsapp = form.whatsapp.value;
+
+    const companyInfo = {
+      companyName,
+      logo,
+      prefix,
+      firstName,
+      lastName,
+      designation,
+      bio,
+      phone,
+      altPhone,
+      whatsapp,
+    };
+
+    fetch(`http://localhost:8000/api/v1/cards/${insertedId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({companyInfo}),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        navigator("/create/step2", { 
+          // pass the insertedId to the next step
+          state: {insertedId: insertedId}
+         });
+      });
+  };
   return (
     <div className="py-10">
       <div className="container">
@@ -8,13 +60,16 @@ const Step1 = () => {
           <h2 className="text-3xl font-bold mb-4">Contact Information</h2>
         </div>
 
-        <form action="/create/step2" className="md:w-8/12 w-full mx-auto">
+        <form
+          className="md:w-8/12 w-full mx-auto"
+          onSubmit={updateCard}
+        >
           <div className="item mb-3">
             <label htmlFor="">Company Name</label>
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="companyName"
               id=""
             />
           </div>
@@ -36,7 +91,7 @@ const Step1 = () => {
               <input
                 type="text"
                 className="w-full p-3 rounded border border-gray-300 mt-2"
-                name=""
+                name="prefix"
                 id=""
               />
             </div>
@@ -45,7 +100,7 @@ const Step1 = () => {
               <input
                 type="text"
                 className="w-full p-3 rounded border border-gray-300 mt-2"
-                name=""
+                name="firstName"
                 id=""
               />
             </div>
@@ -54,7 +109,7 @@ const Step1 = () => {
               <input
                 type="text"
                 className="w-full p-3 rounded border border-gray-300 mt-2"
-                name=""
+                name="lastName"
                 id=""
               />
             </div>
@@ -65,7 +120,7 @@ const Step1 = () => {
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="designation"
               id=""
             />
           </div>
@@ -74,7 +129,7 @@ const Step1 = () => {
             <textarea
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="bio"
               id=""
             ></textarea>
           </div>
@@ -86,7 +141,7 @@ const Step1 = () => {
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="phone"
               id=""
             />
           </div>
@@ -95,7 +150,7 @@ const Step1 = () => {
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="altPhone"
               id=""
             />
           </div>
@@ -104,7 +159,7 @@ const Step1 = () => {
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="whatsapp"
               id=""
             />
           </div>

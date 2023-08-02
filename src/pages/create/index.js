@@ -1,16 +1,41 @@
 import React from "react";
 import card from "../../assets/image/card.avif";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-  //   const [countries, setCountries] = useState({});
 
-  //   useEffect(() => {
-  //     fetch("https://restcountries.com/v3.1/all")
-  //       .then((res) => res.json())
-  //       .then((data) => setCountries(data?.name?.common));
-  //   }, []);
+  const navigator = useNavigate()
 
-  //   console.log(countries);
+  const createCard = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const country = form.country.value;
+    const phone = form.phone.value;
+    const cardName = form.cardName.value;
+    const cardNumber = form.cardNumber.value;
+
+    const formData = {
+      country,
+      phone,
+      cardName,
+      cardNumber,
+    };
+
+    fetch("http://localhost:8000/api/v1/cards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        navigator("/create/step1", { state: data });
+      });
+  };
 
   return (
     <div className="py-10">
@@ -19,14 +44,17 @@ const Create = () => {
           <h2 className="text-3xl font-bold mb-4">Create Your Own Card</h2>
         </div>
 
-        <form action="/create/step1" className="md:w-8/12 w-full mx-auto">
+        <form
+          className="md:w-8/12 w-full mx-auto"
+          onSubmit={createCard}
+        >
           <div className="form-item mb-3">
             <label htmlFor="">Country</label>
             <input
               required
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name="phone"
+              name="country"
               id=""
             />
           </div>
@@ -46,7 +74,7 @@ const Create = () => {
               required
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name="phone"
+              name="cardName"
               id=""
             />
           </div>
@@ -54,19 +82,19 @@ const Create = () => {
             <label htmlFor="">Choose Card</label>
             <div className="flex justify-start items-center gap-5">
               <div className="flex justify-start items-center">
-                <input type="radio" value={1} name="card" id="card1" />
+                <input type="radio" value={1} name="cardNumber" id="card1" />
                 <label htmlFor="card1">
                   <img src={card} className="w-[150px] m-2 rounded" alt="" />
                 </label>
               </div>
               <div className="flex justify-start items-center">
-                <input type="radio" value={3} name="card" id="card2" />
+                <input type="radio" value={3} name="cardNumber" id="card2" />
                 <label htmlFor="card2">
                   <img src={card} className="w-[150px] m-2 rounded" alt="" />
                 </label>
               </div>
               <div className="flex justify-start items-center">
-                <input type="radio" value={3} name="card" id="card3" />
+                <input type="radio" value={3} name="cardNumber" id="card3" />
                 <label htmlFor="card3">
                   <img src={card} className="w-[150px] m-2 rounded" alt="" />
                 </label>

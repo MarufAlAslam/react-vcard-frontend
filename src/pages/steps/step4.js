@@ -1,6 +1,48 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Step4 = () => {
+  const location = useLocation();
+  const state = location.state;
+  const insertedId = state.insertedId;
+
+  const navigator = useNavigate();
+  const updateCard = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const establishmentYear = form.establishmentYear.value;
+    const natureOfBusiness = form.natureOfBusiness.value;
+    const specialities = form.specialities.value;
+    const description = form.description.value;
+    const brochure = "";
+
+
+    const aboutData = {
+      establishmentYear,
+      natureOfBusiness,
+      specialities,
+      description,
+      brochure,
+    };
+
+    fetch(`http://localhost:8000/api/v1/cards/${insertedId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ aboutData }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        navigator("/sample", {
+          // pass the insertedId to the next step
+          state: { insertedId: insertedId },
+        });
+      });
+  };
   return (
     <div className="py-10">
       <div className="container">
@@ -8,13 +50,13 @@ const Step4 = () => {
           <h2 className="text-3xl font-bold mb-4">About Us</h2>
         </div>
 
-        <form action="/create/step4.js" className="md:w-8/12 w-full mx-auto">
+        <form className="md:w-8/12 w-full mx-auto" onSubmit={updateCard}>
           <div className="item mb-3">
             <label htmlFor="">Establishment Year</label>
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="establishmentYear"
               id=""
             />
           </div>
@@ -23,7 +65,7 @@ const Step4 = () => {
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="natureOfBusiness"
               id=""
             />
           </div>
@@ -33,7 +75,7 @@ const Step4 = () => {
             <input
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="specialities"
               id=""
             />
           </div>
@@ -42,7 +84,7 @@ const Step4 = () => {
             <textarea
               type="text"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="description"
               id=""
             ></textarea>
           </div>
@@ -51,7 +93,7 @@ const Step4 = () => {
             <input
               type="file"
               className="w-full p-3 rounded border border-gray-300 mt-2"
-              name=""
+              name="brochure"
               id=""
             />
           </div>
