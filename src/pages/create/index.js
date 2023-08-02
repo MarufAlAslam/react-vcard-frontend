@@ -51,7 +51,7 @@ const Create = () => {
             />
           </div>
           <div className="form-item mb-3">
-            <label htmlFor="">Choose Cart</label>
+            <label htmlFor="">Choose Card</label>
             <div className="flex justify-start items-center gap-5">
               <div className="flex justify-start items-center">
                 <input type="radio" value={1} name="card" id="card1" />

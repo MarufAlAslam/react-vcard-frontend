@@ -11,27 +11,27 @@ const Footer = () => {
 
           <ul className="flex justify-center items-center gap-5 text-white">
             <li>
-                <a href="/" className="text-white">
+              <a href="/" className="text-white">
                 Privacy Policy
-                </a>
+              </a>
             </li>
             |
             <li>
-                <a href="/" className="text-white">
+              <a href="/" className="text-white">
                 Privacy Policy Terms and Conditions
-                </a>
+              </a>
             </li>
             |
             <li>
-                <a href="/" className="text-white">
-               Disclaimer
-                </a>
+              <a href="/" className="text-white">
+                Disclaimer
+              </a>
             </li>
             |
             <li>
-                <a href="/" className="text-white">
+              <a href="/" className="text-white">
                 Refund Policy
-                </a>
+              </a>
             </li>
           </ul>
         </div>
